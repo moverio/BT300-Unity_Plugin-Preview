@@ -1,0 +1,221 @@
+Using the Epson Moverio BT-300 Unity Plugin
+
+Please note this guide assumes that you have already followed the install guide and are now
+simply trying to call the actual functionality within your project. 
+
+For the most part all of the code functions described in this guide are functions and values
+that you can call from your own dev projects, scenes or prefabs. 
+
+Feel free to look at and play with the rest of the code in this project, just know 
+that this guide assumes you will mainly use the plugin as-is and simply
+want to call the functions from portions of your own project that you define. 
+
+The major exception to that would be camera rig values and initial settings that you can adjust from
+within the Unity Editor. 
+
+1. Using the Camera Rig
+
+For the most part the camera rig defaults to a certain position, and 
+for a lot of people it should work. If needed, you can change it's
+position using the transform section. 
+
+The Camera Rig is split into a 2D Camera and a 3D Camera. 
+
+The 2D camera can be used as any other camera in a Unity app for any type of device. 
+
+The 3D Camera rig is split into both a right eye cam and a left eye cam. For 3D mode
+you have to be mindful of both of these cameras in order to pay respect to both eyes. 
+
+When using 3D mode you want to be sure that the left eye camera
+and the right eye camera are equal distances away from a center point with respect to the x-axis. 
+
+For example, When starting from zero your left eye wants to be set at -0.05 and the right
+eye has to be set to 0.05. 
+
+Each camera individually behaves like any other camera, it's simply the combination of both of them that creates the 3D effect. 
+
+When using 2D mode the 2D camera rig is used and when using 3D mode the 3D camera rig is used. 
+
+2. Display Control Functions
+
+Using the Display Control functions is fairly simple. 
+By default, the display is set to 2D Mode with the maximum
+brightness setting of 20. 
+
+To change these default settings you could change it in the code, or you could alternatively use the Unity
+Editor to set different initial values. All this is done with the MoverioController Prefab or MoverioController script. 
+
+Brightness can be changed to any integer value between 0 and 20. 
+Initial Display Mode can be either Display 2D or Display 3D. 
+
+2-A. SetDisplayBrightness
+
+To set the display brightness use the following script.
+
+MoverioController.Instance.SetDisplayBrightness(10);
+
+Please note that the display brightness will adjust to whatever integer value you input
+between 0 and 20. 
+
+2-B. GetDisplayBrightness
+
+You can read the data instead of setting it by calling GetDisplayBrightness  
+Use the following code. 
+
+MoverioController.Instance.GetDisplayBrightness;
+
+This call simply returns an int. 
+
+2-C. Display Mute
+
+The following functions will allow you to mute the display. 
+Please note this function does not pause the application or game, it simply
+mutes/turns off the display. It's also important to note that you can only mute
+both projectors at the same time. The function cannot be used independently for
+one projector. 
+
+The line below will mute the display. 
+
+MoverioController.Instance.MuteDisplay(true);
+
+This line below will unmute the display.
+
+MoverioController.Instance.MuteDisplay(false); 
+
+The function simply needs a boolean true or false value. 
+
+2-D. Switching Between 2D and 3D modes. 
+
+The default setting is 2D Mode. It can be changed by selecting the 
+MoverioController Prefab and then using the initial settings portion 
+of the script tab. 
+
+The drop down box will let you select either Display 2D for 2D Mode or 
+Display 3D for 3D mode. 
+
+The following lines will allow you to switch between 2D and 3D modes in your
+own projects. 
+
+To activate 3D mode use
+MoverioController.Instance.SetDisplay3D(true);
+
+To go back to 2D mode use 
+MoverioController.Instance.SetDisplay3D(false);
+
+The function simply takes a boolean value of true or false. 
+
+Please keep in mind that Moverio uses a side by side 3D format. Essentially
+that means you have to be displaying the same thing on each side that will
+then get overlaid on top of each other. 
+
+To give you an example, looking at the 3D content in 2D would lead you to see
+the same picture or video twice -- once on the left side and once on the right
+side. 
+
+In terms of resolution, the images are the same height, but in terms of length you
+display the same image once you get past the half way point. In a sense you 
+divide the length in half. 
+
+With these considerations you should be ready to display 3D content. 
+
+3. Sensor Control
+
+This next portion will help you figure out how to use the sensors on
+the Moverio BT-300. 
+
+Sensors on the headset and sensors on the controller actually vary a bit on how you 
+use them. The Unity Plugin does not provide much functionality as to sensors
+on the headset. 
+
+3-A. Headset Sensors
+
+The sensors on the headset are called with standard Android APIs. 
+This means that all sensors on the headset are called with the standard Unity functions. 
+
+As a result it means that you can operate the sensors on the headset the exact same way
+as you would on any other mobile Android device. There was no need to build this functionality into
+our plugin since Unity already includes this feature set. 
+
+You can use the standard Unity functions to control various headset sensors and they would 
+all map to the sensors on the controller. Furthermore, head tracking is handled with standard Android
+scripts, but please feel free to look at and use our head tracking script to see one way of implementing it. 
+
+3-B Controller Sensors
+
+The sensors on the controller are a bit of a different story. The Epson SDK includes added sensor types that 
+allow developers to use the sensors on the controller. The sensors on the controller are listed below. 
+
+	TYPE_CONTROLLER_ACCELEROMETER
+	TYPE_CONTROLLER_MAGNETIC_FIELD
+	TYPE_CONTROLLER_GYROSCOPE
+	TYPE_CONTROLLER_ROTATION_VECTOR
+	
+Unity only supports one sensor at a time when it comes to Android. 
+Therefore we've made it easy for developers to get the data from these
+sensor types. 
+
+However, actually using the data and implementing it is up to the developer. 
+
+A sample we've provided is how to print data. You can find that in the Tutorial Controller script. 
+
+An example listed below would return the data as a string.
+
+MoverioController.Instance.GetSensorData (TYPE_CONTROLLER_ACCELEROMETER)[0].ToString ();
+
+This specifically would get the controller accelerometer data with respect to the x-axis. 
+
+To print the X, Y and Z axes on the screen of your application you can use a command like the following. 
+
+TextView2.text = "CONTROLLER ACCEL x: " + MoverioController.Instance.GetSensorData (TYPE_CONTROLLER_ACCELEROMETER)[0].ToString () + ", "+ "y: " + MoverioController.Instance.GetSensorData (TYPE_CONTROLLER_ACCELEROMETER)[1].ToString () + ", " + "z: " + MoverioController.Instance.GetSensorData (TYPE_CONTROLLER_ACCELEROMETER)[2].ToString ();
+
+This would output
+
+ Controller Accel x: (accel x value) + y: (accel y value) + z: (accel z value)
+
+The additional sensors could be used in the exact same manner, except you would change the sensor name. 
+For example the gyroscope would be. (Note the code below would just give you the x axis method as a string)
+
+MoverioController.Instance.GetSensorData (TYPE_CONTROLLER_GYROSCOPE)[0].ToString ();
+
+All of the other sensors mentioned at the top of the section would function in the exact same way. 
+
+
+3-C Headset Tap
+
+Finally we have headset tap. The sensor type is defined as
+
+	TYPE_HEADSET_TAP
+
+As headset tap doesn't really return actual values we implemented it a little differently. 
+
+Rather, you can call GetHeadsetTap() to recognize when the headset has been tapped. 
+It can be called with the following. 
+
+MoverioController.Instance.GetHeadsetTap();
+
+We've also implemented a HeadsetTapCount in order to recognize when the headset has actually been tapped. 
+you can call that function with the line below.
+
+MoverioController.Instance.GetHeadsetTapCount();
+
+An example use case we provided would be printing a headset tap count. Count goes up every time the headset is tapped. 
+It also switches a true/false value when the headset is tapped. 
+
+TextView6.text = "Tap: " + MoverioController.Instance.GetHeadsetTap ().ToString () + ", Tap Count: " + MoverioController.Instance.GetHeadsetTapCount ().ToString ();
+
+With that you should be able to use headset tap. 
+
+4. Conclusion. 
+
+That summarizes all of the functionality within the plugin. Please feel free
+to play with it as you wish. All portions of the Epson SDK are supported and you should be able to
+create some amazing applications when you use this with the standard Unity Android support. 
+
+Please note that to support transparency you simply need to set your background to black, as black
+is clear in the world of HMDs. 
+
+If you have any other questions please contact Moverio_Tech@erd.epson.com. 
+
+
+
+
