@@ -45,6 +45,7 @@ public class HeadTrackingAR : MonoBehaviour
 		HeadTracker.transform.position = transform.position;
 		transform.parent = HeadTracker.transform;
 		_gyroIsAvailable = Input.isGyroAvailable;
+		//_gyroIsAvailable = SystemInfo.supportsGyroscope;
 
 		
 		if (_gyroIsAvailable) 

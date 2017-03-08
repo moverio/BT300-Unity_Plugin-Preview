@@ -28,7 +28,6 @@ public class MoverioTutorialController : MonoBehaviour {
 	public GUIText TextView5;
 	public GUIText TextView6;
 
-
 	void Start () 
 
 	{
@@ -43,6 +42,22 @@ public class MoverioTutorialController : MonoBehaviour {
 
 
 	}
+
+
+	void Update (){
+	
+		if (Input.GetKey (KeyCode.Home)) {
+			Application.Quit();
+
+		}
+		if (Input.GetKey (KeyCode.Menu)) {
+			Application.Quit();
+		}
+		if (Input.GetKey (KeyCode.Escape)) {
+			Application.Quit ();
+		}
+	}
+
 
 	//The following depicts how developers recieve sensor data from the Moverio in Unity. 
 
@@ -118,7 +133,7 @@ public class MoverioTutorialController : MonoBehaviour {
 		
 		TextView5.text = "3D Mode on!";
 
-		yield return new WaitForSeconds(3.0f);
+		yield return new WaitForSeconds(10.0f);
 		
 		MoverioController.Instance.SetDisplay3D(false);
 		

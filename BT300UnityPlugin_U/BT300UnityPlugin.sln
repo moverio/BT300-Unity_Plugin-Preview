@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{6B1A5C88-E7DC-CDD9-7DD0-95781D3E129C}") = "BT300UnityPlugin", "Assembly-CSharp.csproj", "{FD53A3A8-39EC-5CFC-F900-3697E2F9A960}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BT300UnityPlugin", "Assembly-CSharp.csproj", "{FD53A3A8-39EC-5CFC-F900-3697E2F9A960}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
