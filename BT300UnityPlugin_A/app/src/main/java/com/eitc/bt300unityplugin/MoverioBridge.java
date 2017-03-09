@@ -20,6 +20,8 @@ import android.os.Bundle;
 
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
+
 import com.epson.moverio.btcontrol.*;
 import com.unity3d.player.UnityPlayerActivity;
 
@@ -103,8 +105,8 @@ public class MoverioBridge extends UnityPlayerActivity implements SensorEventLis
             mDisplayControl.setMode(DisplayControl.DISPLAY_MODE_2D, false);
 
         }
-        sensorArray = null;
-        sensorData = null;
+        //sensorArray = null;
+        //sensorData = null;
 
         super.onStop();
     }
@@ -226,8 +228,11 @@ public class MoverioBridge extends UnityPlayerActivity implements SensorEventLis
     @Override
     protected void onResume(){
         super.onResume();
-        for (int i = 0; i< CUSTOM_SENSOR_COUNT; i++)
+        for (int i = 0; i< CUSTOM_SENSOR_COUNT; i++) {
             sensorManager.registerListener(this, sensorArray[i], SensorManager.SENSOR_DELAY_NORMAL);
+
+        }
+        //check to see if value is null.
     }
 
     //OnPause method to unregister the sensor managers with a listener.

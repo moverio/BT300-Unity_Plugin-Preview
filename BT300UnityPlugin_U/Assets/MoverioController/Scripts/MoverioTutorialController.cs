@@ -44,6 +44,7 @@ public class MoverioTutorialController : MonoBehaviour {
 	}
 
 
+	/*
 	void Update (){
 	
 		if (Input.GetKey (KeyCode.Home)) {
@@ -57,6 +58,9 @@ public class MoverioTutorialController : MonoBehaviour {
 			Application.Quit ();
 		}
 	}
+*/
+
+
 
 
 	//The following depicts how developers recieve sensor data from the Moverio in Unity. 
