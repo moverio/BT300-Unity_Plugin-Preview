@@ -1,7 +1,7 @@
 Hello and thank you for your interest in Moverio. 
 We are very excited that you are interested in using Moverio with the Unity Platform. 
 
-Please see the two additional documents for details on how to use the BT-300 Moverio Unity Plugin. 
+Please see the two additional documents for details on how to use the BT-300/350 Moverio Unity Plugin. 
 The Install guide will show you how to set up your developer environment in order to properly use the 
 Plugin. 
 
